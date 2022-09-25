@@ -1,0 +1,63 @@
+* {
+    font-family:'Times New Roman', Times, serif;
+
+}
+
+p {
+    margin: 0px;
+    font-size: 30px;
+    display: inline;
+}
+
+.green {
+    background-color: green;
+    color: transparent;
+}
+
+.red {
+    background-color: red;
+    color: transparent;
+}
+
+.tr {
+    display: flex;
+    padding:0%;
+    margin:0%;
+    border:0%;
+}
+
+.td {
+    padding:0%;
+    margin:0%;
+    border:0%;
+}
+
+button {
+    background-color: pink;
+    color:black;
+    font-size:larger;
+    position: center;
+}
+
+
+.test {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-rows: 50% 50%;
+    height: 100%;
+}
+
+.control-panel {
+    display: block;
+    text-align: center;
+}
+
+.grid tbody {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+
+
