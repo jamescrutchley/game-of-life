@@ -113,11 +113,14 @@ const Game = () => {
                 <div className='control-panel'>
                     <h1> Conway's Game of Life</h1>
                     <button className='next-gen' onClick={() => update(nextGen(grid,20,20))}>
-                    Next Generation
+                    Next Generation 
+                    </button> 
+                    <button>
+                        Generate Random Grid
                     </button>
                     <br />
                     <br />
-                    <a href='https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life'> Wikipedia Article</a>
+                    <a href='https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life'> Game of Life Wikipedia Article</a>
                 </div>
                 <Grid grid={grid} handleInput={editGrid} rowEdit={rowEdit}/>
             </div>
