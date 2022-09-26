@@ -3,7 +3,7 @@
 
 A simple implementation of Conway's classic cellular automaton.
 
-Created to develop React, JavaScript, and styling skills.
+Created as a React, JavaScript, and styling refresher.
 
 ---
 
