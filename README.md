@@ -1,11 +1,14 @@
-Conway's Game of Life -- In progress.
+# Conway's Game of Life
+(In progress).
 
-Simple Implementation of Conway's classic cellular automaton.
+A simple implementation of Conway's classic cellular automaton.
 
-Created to build on React, JavaScript, and styling abilities.
+Created to develop React, JavaScript, and styling skills.
 
+---
 
-Still to implement:
-- Greater interactivity (user input, presets, etc.)
-- Auto-play/Advance x number of generations
-- Improve cell propogation logic  
+### Still to implement:
+- [ ] Greater interactivity (user input, presets, etc)
+- [ ] Auto-play/Advance x number of generations
+- [ ] Improve cell propogation logic  
+- [ ] Improve page layout/styling
