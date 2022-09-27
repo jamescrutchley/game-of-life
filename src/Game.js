@@ -118,7 +118,13 @@ const Game = () => {
                 }
             }
         }
+        setPlayTimer(playTimer + 1);
         return newGrid;
+    }
+
+    const backOne = (previousGrid) => {
+        setPlayTimer(playTimer - 1);
+        setGrid(previousGrid)
     }
 
     const update = (updatedGrid) => {
@@ -162,7 +168,7 @@ const Game = () => {
                     <button onClick={stop}> Stop </button>
                     <br />
                     <br />
-                    <button className='prev-gen' onClick={() => setGrid(imprint)}>
+                    <button className='prev-gen' onClick={() => backOne(imprint)}>
                     Back One 
                     </button> 
                     <button className='next-gen' onClick={() => update(nextGen(grid,20,20))}>
