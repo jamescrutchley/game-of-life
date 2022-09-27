@@ -1,48 +1,80 @@
 import React from 'react';
 import Grid from './Grid';
 import './Game.css';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 
 let initialGrid = [
-    [1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0],
-    [1,0,0,0,0,0,1,1,1,0,1,1,0,0,0,0,0,0,0,0],
-    [1,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,1,0,0,1],
-    [1,0,0,0,0,1,0,1,1,0,0,1,0,0,0,0,1,0,0,1],
-    [0,0,0,0,1,1,0,1,1,0,1,1,0,0,1,1,1,0,0,0],
-    [0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,0,0,0,0],
+    [1,0,1,1,0,0,0,0,0,0,1,1,0,0,0,1,1,1,1,0],
+    [1,0,1,1,0,0,1,1,1,0,1,1,0,1,1,0,0,0,0,0],
+    [1,0,1,1,0,0,0,0,0,0,1,1,0,1,1,0,1,0,0,1],
+    [1,0,1,0,0,1,0,1,1,0,0,1,0,1,1,0,1,0,0,1],
+    [0,0,1,0,1,1,0,1,1,0,1,1,0,1,1,1,1,0,0,0],
+    [0,0,1,0,1,0,0,0,0,0,0,1,0,0,0,1,0,1,1,1],
+    [0,0,1,0,0,0,0,0,0,0,1,1,0,1,1,1,0,1,1,0],
     [1,0,0,0,0,0,1,1,1,0,0,1,1,0,0,0,0,0,0,0],
-    [1,1,1,0,1,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0],
-    [0,0,1,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0],
-    [1,0,1,0,1,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0],
+    [1,1,1,0,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0],
+    [0,0,1,1,1,0,0,0,0,0,1,1,0,0,0,0,1,1,1,0],
+    [1,0,1,0,1,0,0,0,0,0,1,1,0,0,1,1,1,1,1,0],
     [0,0,1,1,1,0,0,1,0,0,1,1,0,0,1,1,0,0,0,0],
+    [0,0,1,1,1,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0],
     [0,0,1,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0],
-    [0,0,1,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0],
-    [1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
-    [0,0,1,0,1,0,0,1,0,1,1,0,0,1,0,0,0,0,0,1],
-    [1,0,1,0,1,0,0,1,0,1,0,0,0,1,0,0,0,0,0,1],
-    [0,0,1,1,0,0,0,1,0,0,1,0,0,1,1,0,0,0,0,0],
-    [0,0,1,0,1,0,0,0,0,0,1,0,0,0,1,1,1,0,0,0],
+    [1,0,1,0,1,0,0,0,1,1,1,1,1,1,1,0,1,0,1,1],
+    [0,0,1,0,1,0,0,1,0,1,1,0,0,1,1,1,1,0,0,1],
+    [1,0,1,0,1,0,0,1,0,1,0,0,0,1,0,0,1,0,1,1],
+    [0,1,1,1,0,0,0,1,0,0,1,0,0,1,1,0,1,0,0,0],
+    [1,1,1,0,1,0,1,1,1,0,1,0,0,0,1,1,1,0,1,0],
     [0,0,1,0,1,0,0,1,1,0,1,0,1,1,0,0,0,1,1,0],
 ];
+
+
+const life = () => {
+    return ((Math.random() > 0.5) ? 1 : 0)
+}
+
+
 
 
 
 const Game = () => {
 
     const [grid, setGrid] = useState(initialGrid);
+    const [imprint, setImprint] = useState(initialGrid);
+    const [playTimer, setPlayTimer] = useState(0);
+    const [isActive, setIsActive] = useState(false);
+
+    const stop = () => {
+        setIsActive(false);
+    }
+
+    const play = () => {
+        setIsActive(true);
+    }
+
+    useEffect(() => {
+        let interval = null;
+        if (isActive) {
+            interval = setInterval(() => {
+                setPlayTimer(playTimer => playTimer + 1);
+            }, 100);
+            update(nextGen(grid,20,20))
+        } else if (!isActive && playTimer !== 0) {
+            clearInterval(interval);
+        }
+        return () => clearInterval(interval);
+    }, [isActive, playTimer])
+
 
 
     const nextGen = (grid, m, n) => {
 
-
-        console.log('start')
+        setImprint(grid);
 
         let newGrid = new Array(20);
         for (let i = 0; i < m; i++) {
             newGrid[i] = new Array(n).fill(0);
         }
+
 
         //loop thru
         for (let a = 0; a < m; a++) {
@@ -60,8 +92,6 @@ const Game = () => {
                         }
                     }
                 }
-
-                //a /c   +  b / d 
 
                 living -= grid[a][b];
 
@@ -88,7 +118,6 @@ const Game = () => {
                 }
             }
         }
-        console.log('the new grid is:', newGrid)
         return newGrid;
     }
 
@@ -108,14 +137,38 @@ const Game = () => {
     }
 
 
+    const randomGrid = () => {
+        const newGrid = Array(20).fill(0).map(newGrid => Array(20).fill(life()))
+        for (let i=0; i < 20; i++) {
+            for (let j=0; j < 20; j++) {
+                newGrid[i].splice(j,1,life())
+            }
+        }
+        console.log(newGrid);
+        setPlayTimer(0);
+        setGrid(newGrid);
+    }
+
     return (
             <div className='test'>
                 <div className='control-panel'>
-                    <h1> Conway's Game of Life</h1>
+                    <h1> Conway's Game of Life*</h1>
+                    <br />
+                    <p className='subheading'>Generation: {playTimer}</p>
+                    <br />
+                    <br />
+                    <br />
+                    <button onClick={play}> Play </button>
+                    <button onClick={stop}> Stop </button>
+                    <br />
+                    <br />
+                    <button className='prev-gen' onClick={() => setGrid(imprint)}>
+                    Back One 
+                    </button> 
                     <button className='next-gen' onClick={() => update(nextGen(grid,20,20))}>
                     Next Generation 
                     </button> 
-                    <button>
+                    <button onClick={randomGrid}>
                         Generate Random Grid
                     </button>
                     <br />
@@ -128,4 +181,5 @@ const Game = () => {
 };
 
 export default Game;
+
 
