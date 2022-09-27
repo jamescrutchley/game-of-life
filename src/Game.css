@@ -9,21 +9,14 @@ p {
     display: inline;
 }
 
-.subheading {
-    font-size: small;
-}
-
 .green {
     background-color: green;
     color: transparent;
-    font-size:15px;
-    
 }
 
 .red {
     background-color: red;
     color: transparent;
-    font-size: 14.9px;
 }
 
 .tr {
