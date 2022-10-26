@@ -56,8 +56,9 @@ const Game = () => {
         if (isActive) {
             interval = setInterval(() => {
                 setPlayTimer(playTimer => playTimer + 1);
-            }, 100);
+            }, 300);
             update(nextGen(grid,20,20))
+            clearInterval(interval)
         } else if (!isActive && playTimer !== 0) {
             clearInterval(interval);
         }
@@ -122,11 +123,6 @@ const Game = () => {
         return newGrid;
     }
 
-    const backOne = (previousGrid) => {
-        setPlayTimer(playTimer - 1);
-        setGrid(previousGrid)
-    }
-
     const update = (updatedGrid) => {
         console.log('updating grid...')
         setGrid(updatedGrid);
@@ -158,28 +154,19 @@ const Game = () => {
     return (
             <div className='test'>
                 <div className='control-panel'>
-                    <h1> Conway's Game of Life*</h1>
-                    <br />
+                    <h1> Conway's Game of Life</h1>            
                     <p className='subheading'>Generation: {playTimer}</p>
-                    <br />
-                    <br />
-                    <br />
-                    <button onClick={play}> Play </button>
-                    <button onClick={stop}> Stop </button>
-                    <br />
-                    <br />
-                    <button className='prev-gen' onClick={() => backOne(imprint)}>
-                    Back One 
-                    </button> 
-                    <button className='next-gen' onClick={() => update(nextGen(grid,20,20))}>
-                    Next Generation 
-                    </button> 
-                    <button onClick={randomGrid}>
-                        Generate Random Grid
-                    </button>
-                    <br />
-                    <br />
-                    <a href='https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life'> Game of Life Wikipedia Article</a>
+                    <div class="control-panel-buttons">
+                        <button onClick={play}> Play </button>
+                        <button onClick={stop}> Stop </button>
+                        <button className='next-gen' onClick={() => update(nextGen(grid,20,20))}>
+                        Next Generation 
+                        </button> 
+                        <button onClick={randomGrid}>
+                            Reset
+                        </button>
+                    </div>
+                    <a href='https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life'> Learn more about Conway's Game of Life</a>
                 </div>
                 <Grid grid={grid} handleInput={editGrid} rowEdit={rowEdit}/>
             </div>

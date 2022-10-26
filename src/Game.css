@@ -1,3 +1,26 @@
+
+body {
+    height: 100vh;
+    width: 100vw;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: aliceblue;
+}
+
+.test {
+    display: flex;
+    margin: 5%;
+    gap: 6%;
+}
+
+.grid {
+    grid-column-start: 2;
+}
+
 * {
     font-family:'Times New Roman', Times, serif;
 
@@ -14,14 +37,14 @@ p {
 }
 
 .green {
-    background-color: green;
+    background-color: rgb(58, 58, 208);
     color: transparent;
     font-size:15px;
     
 }
 
 .red {
-    background-color: red;
+    background-color: pink;
     color: transparent;
     font-size: 14.9px;
 }
@@ -47,16 +70,39 @@ button {
 }
 
 
-.test {
-    display: grid;
-    grid-template-columns: 40% 60%;
-    grid-template-rows: 50% 50%;
-    height: 100%;
+.control-panel {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    min-height: 50vh;
+    justify-content: space-between;
+    background-color: rgb(255, 225, 230);
+    border: 0.1em black solid;
+    padding: 1%;
 }
 
-.control-panel {
-    display: block;
-    text-align: center;
+.control-panel h1 {
+    border-bottom: solid black 2px;
+    padding-bottom: 5px;
+}
+
+.control-panel-buttons {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 0.5em;
+}
+
+.control-panel-buttons button {
+    border: none;
+    width: 90%;
+    align-self: center;
+    border-radius: 3em;
+}
+
+.control-panel-buttons button:hover {
+    background-color: rgb(255, 165, 180);
 }
 
 .grid tbody {
