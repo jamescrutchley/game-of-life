@@ -40,7 +40,7 @@ const Game = () => {
 
     const [grid, setGrid] = useState(initialGrid);
     const [imprint, setImprint] = useState(initialGrid);
-    const [playTimer, setPlayTimer] = useState(0);
+    const [playTimer, setPlayTimer] = useState(0); //generation count
     const [isActive, setIsActive] = useState(false);
 
     const stop = () => {
@@ -51,12 +51,14 @@ const Game = () => {
         setIsActive(true);
     }
 
+
+    // 300ms intervals but often updates much faster. I'm missing something here.
     useEffect(() => {
         let interval = null;
         if (isActive) {
             interval = setInterval(() => {
                 setPlayTimer(playTimer => playTimer + 1);
-            }, 300);
+            }, 300); 
             update(nextGen(grid,20,20))
             clearInterval(interval)
         } else if (!isActive && playTimer !== 0) {
@@ -128,14 +130,17 @@ const Game = () => {
         setGrid(updatedGrid);
     }
 
+
+    // Allow user to click cells to bring them to life. Would need to grab cell position(?)
+
     const editGrid = (e) => {
         const cellValue = window.event.target.textContent; //val but no knowledge of 'where' cell is. 
         console.log(cellValue); 
     }
     
+
     const rowEdit = (e) => {
         console.log(e.target.id);
-
     }
 
 
