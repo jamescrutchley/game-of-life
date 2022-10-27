@@ -5,7 +5,7 @@ Created to refresh basic React and JS concepts.
 
 ---
 ### To fix:
-- [ ] Grid refresh interval timer
+- [x] Grid refresh interval timer
 
 ### To implement:
 - [x] Simple layout and styling
