@@ -39,7 +39,7 @@ const life = () => {
 const Game = () => {
 
     const [grid, setGrid] = useState(initialGrid);
-    const [imprint, setImprint] = useState(initialGrid);
+    //const [imprint, setImprint] = useState(initialGrid);
     const [playTimer, setPlayTimer] = useState(0); //generation count - refactor
     const [isActive, setIsActive] = useState(false);
 
@@ -48,11 +48,8 @@ const Game = () => {
     }
 
     const play = () => {
-
         setIsActive(true);
-
     }
-
 
     useEffect(() => {
         if (isActive) {
@@ -65,11 +62,9 @@ const Game = () => {
         }
     });
 
- 
-
     const nextGen = (grid, m, n) => {
 
-        setImprint(grid);
+        //setImprint(grid);
 
         let newGrid = new Array(20);
         for (let i = 0; i < m; i++) {
@@ -149,8 +144,15 @@ const Game = () => {
                 newGrid[i].splice(j,1,life())
             }
         }
-        console.log(newGrid);
-        setPlayTimer(0);
+
+        if (isActive) {
+            setPlayTimer(0);
+            setIsActive(true);
+        } else {
+            setPlayTimer(0);
+            stop();
+        }
+
         setGrid(newGrid);
     }
 
