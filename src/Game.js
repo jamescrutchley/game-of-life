@@ -40,7 +40,7 @@ const Game = () => {
 
     const [grid, setGrid] = useState(initialGrid);
     const [imprint, setImprint] = useState(initialGrid);
-    const [playTimer, setPlayTimer] = useState(0); //generation count
+    const [playTimer, setPlayTimer] = useState(0); //generation count - refactor
     const [isActive, setIsActive] = useState(false);
 
     const stop = () => {
