@@ -7,7 +7,7 @@ Created to refresh basic React and JS concepts.
 ### To fix:
 - [ ] Grid refresh interval timer
 
-### Still to implement:
+### To implement:
 - [x] Simple layout and styling
 - [ ] Greater interactivity (user input, presets, etc)
 
