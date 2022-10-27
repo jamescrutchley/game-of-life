@@ -58,7 +58,7 @@ const Game = () => {
         if (isActive) {
             interval = setInterval(() => {
                 setPlayTimer(playTimer => playTimer + 1);
-            }, 300); 
+            }, 3000); 
             update(nextGen(grid,20,20))
             clearInterval(interval)
         } else if (!isActive && playTimer !== 0) {
