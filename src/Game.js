@@ -55,7 +55,6 @@ const Game = () => {
 
 
     useEffect(() => {
-
         if (isActive) {
             let interval = setTimeout(function play() {
                 update(nextGen(grid,20,20));
