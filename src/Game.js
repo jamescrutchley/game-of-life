@@ -48,26 +48,25 @@ const Game = () => {
     }
 
     const play = () => {
+
         setIsActive(true);
+
     }
 
 
-    // 300ms intervals but often updates much faster. I'm missing something here.
     useEffect(() => {
-        let interval = null;
+
         if (isActive) {
-            interval = setInterval(() => {
-                setPlayTimer(playTimer => playTimer + 1);
-            }, 3000); 
-            update(nextGen(grid,20,20))
-            clearInterval(interval)
-        } else if (!isActive && playTimer !== 0) {
-            clearInterval(interval);
+            let interval = setTimeout(function play() {
+                update(nextGen(grid,20,20));
+                setPlayTimer(playTimer + 1);
+            }, 100);
+        } else {
+            let interval = null;
         }
-        return () => clearInterval(interval);
-    }, [isActive, playTimer])
+    });
 
-
+ 
 
     const nextGen = (grid, m, n) => {
 
