@@ -32,12 +32,16 @@ const randomLife = () => {
 // ];
 
 
-let initialGrid = new Array(20);
-for (let i = 0; i < 20; i++) {
-    initialGrid[i] = new Array(20).fill(0);
-    for (let a = 0; a < 20; a++) {
-        initialGrid[i][a] = randomLife();
+let initialGrid = () => {
+
+    let newGrid = new Array(20);
+    for (let i = 0; i < 20; i++) {
+        newGrid[i] = new Array(20).fill(0);
+        for (let a = 0; a < 20; a++) {
+            newGrid[i][a] = randomLife();
+        }
     }
+    return newGrid;
 }
 
 
@@ -83,13 +87,10 @@ const Game = () => {
         for (let i = 0; i < m; i++) {
             newGrid[i] = new Array(n).fill(0);
         }
-
-
         //loop thru
         for (let a = 0; a < m; a++) {
             for (let b = 0; b < n; b++) {
 
-                
                 //find living neighbours
                 let living = 0;
 
@@ -161,13 +162,11 @@ const Game = () => {
 
 
     const randomGrid = () => {
-
         clearTimeout(interval);
 
         setIsActive(false);
         setGenCount(0);
         setGrid(initialGrid)
-
     }
 
     return (
