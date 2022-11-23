@@ -44,27 +44,36 @@ for (let i = 0; i < 20; i++) {
 const Game = () => {
 
     const [grid, setGrid] = useState(initialGrid);
-    const [genCount, setGenCount] = useState(0); //generation count - refactor
+    const [genCount, setGenCount] = useState(0); 
     const [isActive, setIsActive] = useState(false);
 
     const stop = () => {
         setIsActive(false);
+        clearTimeout(interval);
     }
 
     const play = () => {
+        console.log('play set to true')
         setIsActive(true);
     }
 
+    let interval = null;
+
     useEffect(() => {
         if (isActive) {
-            let interval = setTimeout(function play() {
+            interval = setTimeout(function play() {
                 update(nextGen(grid,20,20));
                 setGenCount(genCount + 1);
+                console.log('interval called')
             }, 100);
+            return () => {
+                clearTimeout(interval);
+            }
         } else {
-            let interval = null;
+            clearTimeout(interval);
+            console.log('null interval')
         }
-    });
+        });
 
     
 
@@ -98,18 +107,18 @@ const Game = () => {
                 //Rules of Life
                 //Death - no neighbours:
                 if ((grid[a][b] === 1) && (living < 2)) {
-                    console.log('death at', a,',',b);
+                    //console.log('death at', a,',',b);
                     newGrid[a][b] = 0;
 
                 }   
                 //Death from overpopulation:
                 else if ((grid[a][b] === 1) && (living > 3)) {
-                    console.log('death from overpopulation')
+                    //console.log('death from overpopulation')
                     newGrid[a][b] = 0;
                 } 
                 //Birth:
                 else if ((grid[a][b] === 0) && (living === 3)) {
-                    console.log('new life born')
+                    //console.log('new life born')
                     newGrid[a][b] = 1;
                 }
                 //No change:
@@ -127,6 +136,16 @@ const Game = () => {
         setGrid(updatedGrid);
     }
 
+    const nextGenButton = (updatedGrid) => {
+        if (isActive) {
+            console.log('next gen should be disabled...')
+            return;
+        } else {
+            console.log('why is this firing')
+            setGrid(updatedGrid);
+        }
+    }
+
 
     // Allow user to click cells to bring them to life. Would need to grab cell position(?)
 
@@ -142,23 +161,13 @@ const Game = () => {
 
 
     const randomGrid = () => {
-        const newGrid = Array(20).fill(0).map(newGrid => Array(20).fill(randomLife()))
-        for (let i=0; i < 20; i++) {
-            for (let j=0; j < 20; j++) {
-                newGrid[i].splice(j,1,randomLife())
-            }
-        }
-        setGrid(newGrid);
 
-        if (isActive) {
-            setGenCount(0);
-            play();
-        } else {
-            setGenCount(0);
-            stop();
-        }
+        clearTimeout(interval);
 
-        
+        setIsActive(false);
+        setGenCount(0);
+        setGrid(initialGrid)
+
     }
 
     return (
@@ -169,7 +178,7 @@ const Game = () => {
                     <div class="control-panel-buttons">
                         <button onClick={play}> Play </button>
                         <button onClick={stop}> Stop </button>
-                        <button className='next-gen' onClick={() => update(nextGen(grid,20,20))}>
+                        <button className='next-gen' onClick={() => nextGenButton(nextGen(grid,20,20))}>
                         Next Generation 
                         </button> 
                         <button onClick={randomGrid}>
