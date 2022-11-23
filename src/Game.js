@@ -44,7 +44,7 @@ for (let i = 0; i < 20; i++) {
 const Game = () => {
 
     const [grid, setGrid] = useState(initialGrid);
-    const [playTimer, setPlayTimer] = useState(0); //generation count - refactor
+    const [genCount, setGenCount] = useState(0); //generation count - refactor
     const [isActive, setIsActive] = useState(false);
 
     const stop = () => {
@@ -59,7 +59,7 @@ const Game = () => {
         if (isActive) {
             let interval = setTimeout(function play() {
                 update(nextGen(grid,20,20));
-                setPlayTimer(playTimer + 1);
+                setGenCount(genCount + 1);
             }, 100);
         } else {
             let interval = null;
@@ -118,7 +118,7 @@ const Game = () => {
                 }
             }
         }
-        setPlayTimer(playTimer + 1);
+        setGenCount(genCount + 1);
         return newGrid;
     }
 
@@ -148,23 +148,24 @@ const Game = () => {
                 newGrid[i].splice(j,1,randomLife())
             }
         }
+        setGrid(newGrid);
 
         if (isActive) {
-            setPlayTimer(0);
-            setIsActive(true);
+            setGenCount(0);
+            play();
         } else {
-            setPlayTimer(0);
+            setGenCount(0);
             stop();
         }
 
-        setGrid(newGrid);
+        
     }
 
     return (
             <div className='test'>
                 <div className='control-panel'>
                     <h1> Conway's Game of Life</h1>            
-                    <p className='subheading'>Generation: {playTimer}</p>
+                    <p className='subheading'>Generation: {genCount}</p>
                     <div class="control-panel-buttons">
                         <button onClick={play}> Play </button>
                         <button onClick={stop}> Stop </button>
