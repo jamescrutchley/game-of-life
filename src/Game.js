@@ -164,7 +164,7 @@ const Game = () => {
     const randomGrid = () => {
         clearTimeout(interval);
 
-        setIsActive(false);
+        //setIsActive(false);
         setGenCount(0);
         setGrid(initialGrid)
     }
