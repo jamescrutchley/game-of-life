@@ -1,21 +1,28 @@
 
 html {
-    height: auto;
+    height: 100%;
     width: auto;
     display: flex;
     justify-content: center;
+    background-color: aliceblue;
+    align-items: center;
 }
 
 .App {
     display: flex;
     align-items: center;
     justify-content: center;
+    border: rgb(216, 237, 255) solid 5rem;
+}
+
+.App:hover {
+    border: rgb(217, 236, 253) solid 5rem;
 }
 
 
 .test {
   height: 70%;
-  width: 60%;
+  width: 90%;
   margin-left: 1rem;
   margin-right: 1rem;
   gap: 30px;
@@ -88,10 +95,18 @@ button {
     position: center;
 }
 
+.control-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
 
 .control-panel h1 {
     border-bottom: solid black 2px;
     padding-bottom: 5px;
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
 
 .control-panel-buttons {
@@ -128,3 +143,13 @@ button {
 }
 
 
+@media only screen and (min-width: 600px) {
+    .test {
+        flex-direction: row;
+        margin: 1rem;
+    } 
+    
+    .app {
+        justify-content: space-between;
+    }
+}
