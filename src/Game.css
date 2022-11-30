@@ -12,11 +12,6 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: rgb(216, 237, 255) solid 5rem;
-}
-
-.App:hover {
-    border: rgb(217, 236, 253) solid 5rem;
 }
 
 
@@ -159,4 +154,21 @@ button {
     .app {
         justify-content: space-between;
     }
+}
+
+
+
+
+
+
+
+/* Canvas version */
+
+#myCanvas {
+    margin: 1rem;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    box-shadow: inset 1rem rgba(0, 0, 0, 0.188);
 }

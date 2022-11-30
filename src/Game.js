@@ -1,5 +1,6 @@
 import React from 'react';
 import Grid from './Grid';
+import Canvas from './Canvas';
 import './Game.css';
 import { useState, useEffect, useRef } from 'react';
 
@@ -186,7 +187,7 @@ const Game = () => {
                     </div>
                     <a href='https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life'> Learn more about Conway's Game of Life</a>
                 </div>
-                <Grid grid={grid} handleInput={editGrid} rowEdit={rowEdit}/>
+                <Canvas grid={grid}/>
             </div>
     )
 };
