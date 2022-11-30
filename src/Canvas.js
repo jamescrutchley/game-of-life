@@ -3,7 +3,12 @@ import { useEffect, useRef } from 'react';
 
 const Canvas = (props) => {
 
+    function random(number) {
+        return Math.floor(Math.random()*number);
+      }
+
     const myGrid = props.grid;
+    let selectedColour = props.colour;
     const canvasRef = useRef(null);
 
     let canvasWidth;
@@ -19,22 +24,29 @@ const Canvas = (props) => {
         ctx.fill();
 
         myGrid.forEach(row => {
+            
 
             let yIncrement = canvasHeight / 22;
             x = 10;
             y+= yIncrement;
 
-            row.forEach(cell => {
+            let opacityValue = (-1 * ((67*y*y) / 12000000) + ((551*y) / 120000) + 0.1);
 
+            selectedColour = selectedColour.substr(0, 17) + opacityValue + ')'
+            console.log(selectedColour);
+
+
+            row.forEach(cell => {
                 let xIncrement = canvasWidth / 22;
                 x+=xIncrement;
                 let num = parseInt(cell)
 
+
                 if (num == 1) {
                 ctx.moveTo(20, 20);
                 ctx.beginPath();
-                ctx.fillStyle = `rgba(255,192,203,1)`;
-                ctx.arc(x, y, canvasWidth / 50, 0, 2 * Math.PI);
+                ctx.fillStyle = selectedColour;
+                ctx.arc(x, y, canvasHeight/ 35, 0, 2 * Math.PI);
                 ctx.fill();
                 } else {
                     // ctx.moveTo(20, 20);
@@ -44,7 +56,6 @@ const Canvas = (props) => {
                     // ctx.fill();
                 }
             
-                console.log('draw function')
             })
 
             })   
@@ -59,12 +70,14 @@ const Canvas = (props) => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d')
 
-        canvasWidth = canvasRef.current.offsetWidth;
-        canvasHeight = canvasWidth;
+        // canvasWidth = canvasRef.current.offsetWidth;
+        // canvasHeight = canvasWidth;
 
-        ctx.canvas.height = canvasHeight;
+        // ctx.canvas.height = canvasHeight;
 
-        console.log(window.innerHeight)
+        canvasWidth = window.innerWidth - 40;
+        canvasHeight = window.innerHeight - 40;
+        [ctx.canvas.height, ctx.canvas.width] = [canvasHeight, canvasWidth]
 
         draw(ctx);
     }, [draw]) //execute once on initial mount

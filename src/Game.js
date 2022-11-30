@@ -51,6 +51,7 @@ const Game = () => {
     const [grid, setGrid] = useState(initialGrid);
     const [genCount, setGenCount] = useState(0); 
     const [isActive, setIsActive] = useState(false);
+    const [colour, setColour] = useState("rgba(255,192,203,1)")
 
     const stop = () => {
         setIsActive(false);
@@ -134,31 +135,19 @@ const Game = () => {
     }
 
     const update = (updatedGrid) => {
-        console.log('updating grid...')
         setGrid(updatedGrid);
     }
 
     const nextGenButton = (updatedGrid) => {
         if (isActive) {
-            console.log('next gen should be disabled...')
             return;
         } else {
-            console.log('why is this firing')
             setGrid(updatedGrid);
         }
     }
 
-
-    // Allow user to click cells to bring them to life. Would need to grab cell position(?)
-
-    const editGrid = (e) => {
-        const cellValue = window.event.target.textContent; //val but no knowledge of 'where' cell is. 
-        console.log(cellValue); 
-    }
-    
-
-    const rowEdit = (e) => {
-        console.log(e.target.id);
+    const toggleColour = (i) => {
+        (colour === "rgba(255,192,203,1)") ? setColour("rgba(149,255,244,1)") : setColour("rgba(255,192,203,1)");
     }
 
 
@@ -184,10 +173,15 @@ const Game = () => {
                         <button onClick={randomGrid}>
                             Reset
                         </button>
+                        <label for="colour">Colour</label>
+                        <select id="colour" name="colour" onChange={toggleColour}>
+                            <option value="rgba(255,192,203,1)" selected>Pink</option>
+                            <option value="rgba(149, 255, 244,1)">Blue</option>
+                        </select>
                     </div>
                     <a href='https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life'> Learn more about Conway's Game of Life</a>
                 </div>
-                <Canvas grid={grid}/>
+                <Canvas grid={grid} colour={colour}/>
             </div>
     )
 };
