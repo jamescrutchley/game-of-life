@@ -1,10 +1,8 @@
 import React, { useContext } from 'react';
-//import Grid from './Grid';
 import Canvas from './Canvas';
 import './Game.css';
 import { useState, useEffect } from 'react';
 import colourLogo from './circle.svg';
-import Theme from './Theme'
 import ThemeContext from './Theme';
 
 
@@ -33,7 +31,6 @@ const Game = () => {
     const [grid, setGrid] = useState(initialGrid);
     const [genCount, setGenCount] = useState(0); 
     const [isActive, setIsActive] = useState(false);
-    const [colour, setColour] = useState(theme);
     const [gameSpeed, setGameSpeed] = useState(100)
 
     const stop = () => {
@@ -134,30 +131,6 @@ const Game = () => {
 
         let target = i.target.classList[0];
         setTheme(target);
-
-        // switch(target) {
-        //     case 'pink':
-        //         setColour('rgba(254,191,220,1)');
-        //         console.log('working')
-        //         break;
-        //     case 'blue':
-        //         setColour('rgba(156,255,255,1)')
-        //         break;
-        //     case 'green':
-        //         setColour('rgba(193,255,193,1')
-        //         break;
-        //     case 'yellow':
-        //         setColour('rgba(255,255,153,1')
-        //         break;
-        //     case 'black':
-        //         setColour('rgba(0,0,0,1')
-        //         break;
-        //     case 'white':
-        //         setColour('rgba(255,255,255,1)')
-        //         break;
-        //     default:
-        //         //
-        // } 
 
     }
 
