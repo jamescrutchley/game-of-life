@@ -39,10 +39,10 @@ p {
 .green {
     /* width: 1em;
     height: 1em; */
-    background-color: rgb(58, 58, 208);
+    /* background-color: rgb(58, 58, 208);
     color: transparent;
     font-size: auto;
-    border: none;
+    border: none; */
     
 }
 
@@ -144,6 +144,11 @@ button {
 }
 
 
+
+
+
+
+
 @media only screen and (min-width: 600px) {
     .test {
         flex-direction: row;
@@ -154,12 +159,6 @@ button {
         justify-content: space-between;
     }
 }
-
-
-
-
-
-
 
 /* Canvas version */
 
@@ -172,4 +171,47 @@ button {
     box-shadow: inset 1rem rgba(0, 0, 0, 0.188);
     z-index: -1;
     position: absolute;
+}
+
+.select-colour {
+    display: flex;
+    flex-flow: row wrap;
+    list-style: none;
+    padding: 0;
+    justify-content: space-between;
+}
+
+.select-colour p {
+    flex-basis: 100%;
+    margin-bottom: 0.5rem;
+    font-size: 16px;
+}
+
+.select-colour>li img {
+    width: 2rem;
+}
+
+.select-colour>li img:hover {
+    width: 2.5rem;
+    cursor: pointer;
+}
+
+.pink {
+    filter: invert(86%) sepia(77%) saturate(641%) hue-rotate(284deg) brightness(112%) contrast(99%);
+}
+
+.blue {
+    filter: invert(97%) sepia(85%) saturate(897%) hue-rotate(150deg) brightness(103%) contrast(104%);
+}
+
+.green {
+    filter: invert(92%) sepia(9%) saturate(1224%) hue-rotate(61deg) brightness(104%) contrast(101%);
+}
+
+.yellow {
+    filter: invert(87%) sepia(4%) saturate(3338%) hue-rotate(12deg) brightness(109%) contrast(120%);
+}
+
+.white {
+    filter: invert(100%) sepia(36%) saturate(869%) hue-rotate(332deg) brightness(117%) contrast(108%);
 }

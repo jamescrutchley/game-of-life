@@ -1,36 +1,14 @@
 import React from 'react';
-import Grid from './Grid';
+//import Grid from './Grid';
 import Canvas from './Canvas';
 import './Game.css';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
+import colourLogo from './circle.svg';
 
 
 const randomLife = () => {
     return ((Math.random() > 0.5) ? 1 : 0)
 }
-
-// const cloverleafGrid = [
-//     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,1,1,1,0,1,1,1,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0],
-//     [0,0,0,0,1,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,1,1,0,1,0,1,1,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,1,1,0,1,0,1,1,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,1,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0],
-//     [0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,1,1,1,0,1,1,1,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-// ];
 
 
 let initialGrid = () => {
@@ -52,6 +30,7 @@ const Game = () => {
     const [genCount, setGenCount] = useState(0); 
     const [isActive, setIsActive] = useState(false);
     const [colour, setColour] = useState("rgba(255,192,203,1)")
+    const [gameSpeed, setGameSpeed] = useState(100)
 
     const stop = () => {
         setIsActive(false);
@@ -71,7 +50,7 @@ const Game = () => {
                 update(nextGen(grid,20,20));
                 setGenCount(genCount + 1);
                 console.log('interval called')
-            }, 100);
+            }, gameSpeed);
             return () => {
                 clearTimeout(interval);
             }
@@ -147,7 +126,39 @@ const Game = () => {
     }
 
     const toggleColour = (i) => {
-        (colour === "rgba(255,192,203,1)") ? setColour("rgba(149,255,244,1)") : setColour("rgba(255,192,203,1)");
+        console.log(i.target);
+
+        let target = i.target.className;
+        console.log(target)
+
+        switch(target) {
+            case 'pink':
+                setColour('rgba(254,191,220,1)');
+                console.log('working')
+                break;
+            case 'blue':
+                setColour('rgba(156,255,255,1)')
+                break;
+            case 'green':
+                setColour('rgba(193,255,193,1')
+                break;
+            case 'yellow':
+                setColour('rgba(255,255,153,1')
+                break;
+            case 'black':
+                setColour('rgba(0,0,0,1')
+                break;
+            case 'white':
+                setColour('rgba(255,255,255,1)')
+                break;
+            default:
+                //
+        } 
+    }
+
+    const changeSpeed = (e) => {
+        console.log(e.target.value);
+        setGameSpeed(200 / e.target.value)
     }
 
 
@@ -173,11 +184,18 @@ const Game = () => {
                         <button onClick={randomGrid}>
                             Reset
                         </button>
-                        <label for="colour">Colour</label>
-                        <select id="colour" name="colour" onChange={toggleColour}>
-                            <option value="rgba(255,192,203,1)" selected>Pink</option>
-                            <option value="rgba(149, 255, 244,1)">Blue</option>
-                        </select>
+
+                        <ul onClick={toggleColour} className="select-colour"> <p>Colour</p>
+                            <li><img className="pink" src={colourLogo} alt="colour picker button pink" data-rgba="rgba(254,191,220,1)"></img></li>
+                            <li><img className="blue" src={colourLogo} alt="colour picker button blue" data-rgba="rgba(254,191,220,1)"></img></li>
+                            <li><img className="green" src={colourLogo} alt="colour picker button green"></img></li>
+                            <li><img className="yellow" src={colourLogo} alt="colour picker button yellow"></img></li>
+                            <li><img className="black" src={colourLogo} alt="colour picker button black"></img></li>
+                            <li><img className="white" src={colourLogo} alt="colour picker button white"></img></li>
+                        </ul>
+
+                        <label for="speed">Game Speed</label>
+                        <input type="range" id="speed" name="speed" min="1" max="8" defaultValue="2" onChange={e => changeSpeed(e)}></input>
                     </div>
                     <a href='https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life'> Learn more about Conway's Game of Life</a>
                 </div>

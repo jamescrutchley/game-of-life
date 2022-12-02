@@ -46,7 +46,7 @@ const Canvas = (props) => {
                 ctx.moveTo(20, 20);
                 ctx.beginPath();
                 ctx.fillStyle = selectedColour;
-                ctx.arc(x, y, canvasHeight/ 35, 0, 2 * Math.PI);
+                ctx.arc(x, y, (canvasHeight+canvasWidth)/ 70, 0, 2 * Math.PI);
                 ctx.fill();
                 } else {
                     // ctx.moveTo(20, 20);
