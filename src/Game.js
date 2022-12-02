@@ -1,35 +1,14 @@
-import React from 'react';
-import Grid from './Grid';
+import React, { useContext } from 'react';
+import Canvas from './Canvas';
 import './Game.css';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
+import colourLogo from './circle.svg';
+import ThemeContext from './Theme';
 
 
 const randomLife = () => {
     return ((Math.random() > 0.5) ? 1 : 0)
 }
-
-// const cloverleafGrid = [
-//     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,1,1,1,0,1,1,1,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0],
-//     [0,0,0,0,1,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,1,1,0,1,0,1,1,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,1,1,0,1,0,1,1,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,1,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0],
-//     [0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,1,1,1,0,1,1,1,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-//     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-// ];
 
 
 let initialGrid = () => {
@@ -47,9 +26,12 @@ let initialGrid = () => {
 
 const Game = () => {
 
+    const {theme, setTheme} = useContext(ThemeContext);
+
     const [grid, setGrid] = useState(initialGrid);
     const [genCount, setGenCount] = useState(0); 
     const [isActive, setIsActive] = useState(false);
+    const [gameSpeed, setGameSpeed] = useState(100)
 
     const stop = () => {
         setIsActive(false);
@@ -69,7 +51,7 @@ const Game = () => {
                 update(nextGen(grid,20,20));
                 setGenCount(genCount + 1);
                 console.log('interval called')
-            }, 100);
+            }, gameSpeed);
             return () => {
                 clearTimeout(interval);
             }
@@ -133,31 +115,28 @@ const Game = () => {
     }
 
     const update = (updatedGrid) => {
-        console.log('updating grid...')
         setGrid(updatedGrid);
     }
 
     const nextGenButton = (updatedGrid) => {
         if (isActive) {
-            console.log('next gen should be disabled...')
             return;
         } else {
-            console.log('why is this firing')
             setGrid(updatedGrid);
         }
     }
 
+    const toggleColour = (i) => {
+        console.log(i.target.classList[0]);
 
-    // Allow user to click cells to bring them to life. Would need to grab cell position(?)
+        let target = i.target.classList[0];
+        setTheme(target);
 
-    const editGrid = (e) => {
-        const cellValue = window.event.target.textContent; //val but no knowledge of 'where' cell is. 
-        console.log(cellValue); 
     }
-    
 
-    const rowEdit = (e) => {
-        console.log(e.target.id);
+    const changeSpeed = (e) => {
+        console.log(e.target.value);
+        setGameSpeed(200 / e.target.value)
     }
 
 
@@ -174,19 +153,30 @@ const Game = () => {
                 <div className='control-panel'>
                     <h1> Conway's Game of Life</h1>            
                     <p className='subheading'>Generation: {genCount}</p>
-                    <div class="control-panel-buttons">
-                        <button onClick={play}> Play </button>
-                        <button onClick={stop}> Stop </button>
-                        <button className='next-gen' onClick={() => nextGenButton(nextGen(grid,20,20))}>
+                    <div className="control-panel-buttons">
+                        <button className={theme} onClick={play}> Play </button>
+                        <button className={theme} onClick={stop}> Stop </button>
+                        <button className={theme} onClick={() => nextGenButton(nextGen(grid,20,20))}>
                         Next Generation 
                         </button> 
-                        <button onClick={randomGrid}>
+                        <button className={theme} onClick={randomGrid}>
                             Reset
                         </button>
+
+                        <ul onClick={toggleColour} className="ul select-colour"> <p>Colour</p>
+                            <li><img className="pink select-colour-button" src={colourLogo} alt="colour picker button pink" data-rgba="rgba(254,191,220,1)"></img></li>
+                            <li><img className="blue select-colour-button" src={colourLogo} alt="colour picker button blue" data-rgba="rgba(254,191,220,1)"></img></li>
+                            <li><img className="green select-colour-button" src={colourLogo} alt="colour picker button green"></img></li>
+                            <li><img className="yellow select-colour-button" src={colourLogo} alt="colour picker button yellow"></img></li>
+                            <li><img className="white select-colour-button" src={colourLogo} alt="colour picker button white"></img></li>
+                        </ul>
+
+                        <label for="speed">Game Speed</label>
+                        <input type="range" id="speed" name="speed" min="1" max="8" defaultValue="2" onChange={e => changeSpeed(e)}></input>
                     </div>
                     <a href='https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life'> Learn more about Conway's Game of Life</a>
                 </div>
-                <Grid grid={grid} handleInput={editGrid} rowEdit={rowEdit}/>
+                <Canvas grid={grid} colour={theme}/>
             </div>
     )
 };

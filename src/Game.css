@@ -2,34 +2,28 @@
 html {
     height: 100%;
     width: auto;
-    display: flex;
+    /* display: flex; */
     justify-content: center;
-    background-color: aliceblue;
-    align-items: center;
+    box-sizing: border-box;
+    background-color: rgba(235, 235, 235, 1);
 }
 
 .App {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: rgb(216, 237, 255) solid 5rem;
-}
-
-.App:hover {
-    border: rgb(217, 236, 253) solid 5rem;
+    box-sizing: border-box;
 }
 
 
 .test {
-  height: 70%;
-  width: 90%;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  gap: 30px;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: stretch;
+  margin: 0;
 }
 
 p {
@@ -48,10 +42,10 @@ p {
 .green {
     /* width: 1em;
     height: 1em; */
-    background-color: rgb(58, 58, 208);
+    /* background-color: rgb(58, 58, 208);
     color: transparent;
     font-size: auto;
-    border: none;
+    border: none; */
     
 }
 
@@ -91,7 +85,7 @@ p {
 
 
 button {
-    background-color: pink;
+    background-color: rgba(255, 165, 180, 0.2);
     color:black;
     font-size:larger;
     position: center;
@@ -100,15 +94,17 @@ button {
 .control-panel {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    margin: 2rem;
     gap: 0.5rem;
 }
 
 .control-panel h1 {
-    border-bottom: solid black 2px;
     padding-bottom: 5px;
     display: flex;
     align-items: center;
     text-align: center;
+    backdrop-filter: blur(3px);
 }
 
 .control-panel-buttons {
@@ -119,13 +115,16 @@ button {
 
 .control-panel-buttons button {
     border: none;
-    width: 90%;
+    margin-left: 2rem;
+    width: 120%;
     align-self: center;
     border-radius: 3em;
+    border: black 0.1em solid;
+    backdrop-filter: blur(10px);
 }
 
 .control-panel-buttons button:hover {
-    background-color: rgb(255, 165, 180);
+    background-color: rgba(255, 165, 180, 0.3); 
     font-weight: 600;
 }
 
@@ -150,6 +149,11 @@ button {
 }
 
 
+
+
+
+
+
 @media only screen and (min-width: 600px) {
     .test {
         flex-direction: row;
@@ -159,4 +163,101 @@ button {
     .app {
         justify-content: space-between;
     }
+}
+
+/* Canvas version */
+
+#myCanvas {
+    margin: 1rem;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    box-shadow: inset 1rem rgba(0, 0, 0, 0.188);
+    z-index: -1;
+    position: absolute;
+}
+
+.select-colour.ul {
+    display: flex;
+    flex-flow: row wrap;
+    list-style: none;
+    padding: 0;
+    justify-content: space-between;
+}
+
+.select-colour p {
+    flex-basis: 100%;
+    margin-bottom: 0.5rem;
+    font-size: 16px;
+}
+
+.select-colour>li img {
+    width: 2.3rem;
+}
+
+.select-colour>li img:hover {
+    scale:calc(1.3);
+    cursor: pointer;
+}
+
+.pink.select-colour-button {
+    filter: invert(86%) sepia(77%) saturate(641%) hue-rotate(284deg) brightness(112%) contrast(99%);
+}
+
+.blue.select-colour-button {
+    filter: invert(97%) sepia(85%) saturate(897%) hue-rotate(150deg) brightness(103%) contrast(104%);
+}
+
+.green.select-colour-button {
+    filter: invert(92%) sepia(9%) saturate(1224%) hue-rotate(61deg) brightness(104%) contrast(101%);
+}
+
+.yellow.select-colour-button {
+    filter: invert(87%) sepia(4%) saturate(3338%) hue-rotate(12deg) brightness(109%) contrast(120%);
+}
+
+.white.select-colour-button {
+    filter: invert(100%) sepia(36%) saturate(869%) hue-rotate(332deg) brightness(117%) contrast(108%);
+}
+
+.App.pink {
+    box-shadow: inset 0px 0px 100px 20px rgb(255 165 180 / 20%);
+    background-color: rgba(255, 165, 180, 0.1);
+}
+
+.App.blue {
+    box-shadow: inset 0px 0px 100px 20px rgb(156 255 255 / 20%);
+}
+
+.App.green {
+    box-shadow: inset 0px 0px 100px 20px rgb(199 255 193 / 40%);
+}
+
+.App.yellow {
+    box-shadow: inset 0px 0px 100px 20px rgb(255 255 153 / 40%);
+}
+
+.App.white {
+    box-shadow: inset 0px 0px 100px 20px rgb(255 255 255 / 40%);
+}
+
+.control-panel-buttons button.pink {
+    background-color: rgba(255, 165, 180, 0.4);
+}
+
+.control-panel-buttons button.blue {
+    background-color: rgba(156, 255, 255, 0.4);
+}
+
+.control-panel-buttons button.green {
+    background-color: rgba(199, 255, 193, 0.6);
+}
+
+.control-panel-buttons button.yellow {
+    background-color: rgba(255, 255, 153, 0.6);
+}
+
+.control-panel-buttons button.white {
+    background-color: rgba(255, 255, 255, 0.6);
 }
