@@ -7,8 +7,17 @@ const Canvas = (props) => {
         return Math.floor(Math.random()*number);
       }
 
+    
+    let colourLookup = {
+        'pink': 'rgba(254,191,220,1)',
+        'blue': 'rgba(156,255,255,1)',
+        'green': 'rgba(193,255,193,1',
+        'yellow': 'rgba(255,255,153,1',
+        'white': 'rgba(255,255,255,1)',
+    };
+
     const myGrid = props.grid;
-    let selectedColour = props.colour;
+    let selectedColour = colourLookup[props.colour];
     const canvasRef = useRef(null);
 
     let canvasWidth;
@@ -94,3 +103,6 @@ const Canvas = (props) => {
 
 
 export default Canvas;
+
+
+

@@ -1,11 +1,22 @@
 import Game from './Game';
 import './Game.css';
+import { useState, createContext } from 'react';
+import ThemeContext from './Theme';
 
 function App() {
+
+  const [theme, setTheme] = useState('pink');
+  const appClassList = `App ${theme}`;
+
   return (
-    <div className="App">
-        <Game />
-    </div>
+    <ThemeContext.Provider value={{
+      theme,
+      setTheme
+    }}>
+      <div className={appClassList}>
+          <Game/>
+      </div>
+    </ThemeContext.Provider>
   );
 }
 

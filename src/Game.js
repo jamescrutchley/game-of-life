@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 //import Grid from './Grid';
 import Canvas from './Canvas';
 import './Game.css';
 import { useState, useEffect } from 'react';
 import colourLogo from './circle.svg';
+import Theme from './Theme'
+import ThemeContext from './Theme';
 
 
 const randomLife = () => {
@@ -26,10 +28,12 @@ let initialGrid = () => {
 
 const Game = () => {
 
+    const {theme, setTheme} = useContext(ThemeContext);
+
     const [grid, setGrid] = useState(initialGrid);
     const [genCount, setGenCount] = useState(0); 
     const [isActive, setIsActive] = useState(false);
-    const [colour, setColour] = useState("rgba(255,192,203,1)")
+    const [colour, setColour] = useState(theme);
     const [gameSpeed, setGameSpeed] = useState(100)
 
     const stop = () => {
@@ -126,34 +130,35 @@ const Game = () => {
     }
 
     const toggleColour = (i) => {
-        console.log(i.target);
+        console.log(i.target.classList[0]);
 
-        let target = i.target.className;
-        console.log(target)
+        let target = i.target.classList[0];
+        setTheme(target);
 
-        switch(target) {
-            case 'pink':
-                setColour('rgba(254,191,220,1)');
-                console.log('working')
-                break;
-            case 'blue':
-                setColour('rgba(156,255,255,1)')
-                break;
-            case 'green':
-                setColour('rgba(193,255,193,1')
-                break;
-            case 'yellow':
-                setColour('rgba(255,255,153,1')
-                break;
-            case 'black':
-                setColour('rgba(0,0,0,1')
-                break;
-            case 'white':
-                setColour('rgba(255,255,255,1)')
-                break;
-            default:
-                //
-        } 
+        // switch(target) {
+        //     case 'pink':
+        //         setColour('rgba(254,191,220,1)');
+        //         console.log('working')
+        //         break;
+        //     case 'blue':
+        //         setColour('rgba(156,255,255,1)')
+        //         break;
+        //     case 'green':
+        //         setColour('rgba(193,255,193,1')
+        //         break;
+        //     case 'yellow':
+        //         setColour('rgba(255,255,153,1')
+        //         break;
+        //     case 'black':
+        //         setColour('rgba(0,0,0,1')
+        //         break;
+        //     case 'white':
+        //         setColour('rgba(255,255,255,1)')
+        //         break;
+        //     default:
+        //         //
+        // } 
+
     }
 
     const changeSpeed = (e) => {
@@ -175,23 +180,22 @@ const Game = () => {
                 <div className='control-panel'>
                     <h1> Conway's Game of Life</h1>            
                     <p className='subheading'>Generation: {genCount}</p>
-                    <div class="control-panel-buttons">
-                        <button onClick={play}> Play </button>
-                        <button onClick={stop}> Stop </button>
-                        <button className='next-gen' onClick={() => nextGenButton(nextGen(grid,20,20))}>
+                    <div className="control-panel-buttons">
+                        <button className={theme} onClick={play}> Play </button>
+                        <button className={theme} onClick={stop}> Stop </button>
+                        <button className={theme} onClick={() => nextGenButton(nextGen(grid,20,20))}>
                         Next Generation 
                         </button> 
-                        <button onClick={randomGrid}>
+                        <button className={theme} onClick={randomGrid}>
                             Reset
                         </button>
 
-                        <ul onClick={toggleColour} className="select-colour"> <p>Colour</p>
-                            <li><img className="pink" src={colourLogo} alt="colour picker button pink" data-rgba="rgba(254,191,220,1)"></img></li>
-                            <li><img className="blue" src={colourLogo} alt="colour picker button blue" data-rgba="rgba(254,191,220,1)"></img></li>
-                            <li><img className="green" src={colourLogo} alt="colour picker button green"></img></li>
-                            <li><img className="yellow" src={colourLogo} alt="colour picker button yellow"></img></li>
-                            <li><img className="black" src={colourLogo} alt="colour picker button black"></img></li>
-                            <li><img className="white" src={colourLogo} alt="colour picker button white"></img></li>
+                        <ul onClick={toggleColour} className="ul select-colour"> <p>Colour</p>
+                            <li><img className="pink select-colour-button" src={colourLogo} alt="colour picker button pink" data-rgba="rgba(254,191,220,1)"></img></li>
+                            <li><img className="blue select-colour-button" src={colourLogo} alt="colour picker button blue" data-rgba="rgba(254,191,220,1)"></img></li>
+                            <li><img className="green select-colour-button" src={colourLogo} alt="colour picker button green"></img></li>
+                            <li><img className="yellow select-colour-button" src={colourLogo} alt="colour picker button yellow"></img></li>
+                            <li><img className="white select-colour-button" src={colourLogo} alt="colour picker button white"></img></li>
                         </ul>
 
                         <label for="speed">Game Speed</label>
@@ -199,7 +203,7 @@ const Game = () => {
                     </div>
                     <a href='https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life'> Learn more about Conway's Game of Life</a>
                 </div>
-                <Canvas grid={grid} colour={colour}/>
+                <Canvas grid={grid} colour={theme}/>
             </div>
     )
 };
