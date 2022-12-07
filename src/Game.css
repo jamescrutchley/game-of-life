@@ -1,6 +1,5 @@
 
 html {
-    height: 100%;
     width: auto;
     /* display: flex; */
     justify-content: center;
@@ -9,6 +8,7 @@ html {
 }
 
 .App {
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,6 +17,7 @@ html {
 
 
 .test {
+  box-sizing: border-box;
   height: 100%;
   width: 100%;
   display: flex;
@@ -36,51 +37,6 @@ p {
     font-size: large;
     margin-bottom: 1rem;
     text-align: center;
-}
-
-
-.green {
-    /* width: 1em;
-    height: 1em; */
-    /* background-color: rgb(58, 58, 208);
-    color: transparent;
-    font-size: auto;
-    border: none; */
-    
-}
-
-.red {
-    background-color: pink;
-    color: transparent;
-    font-size: auto;
-    border: none;
-    height: auto;
-}
-
-.tr {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    margin: 0;
-    border:0%;
-    gap: 0;
-    width: fit-content;
-}
-
-.td {
-    display: flex;
-    align-items: stretch;
-    padding: 0;
-    margin: 0;
-    border:0%;
-    width: 15px;
-    height: 15px;
-}
-
-.td button {
-    width: auto;
-    height: auto;
 }
 
 
@@ -157,7 +113,6 @@ button {
 @media only screen and (min-width: 600px) {
     .test {
         flex-direction: row;
-        margin: 1rem;
     } 
     
     .app {
@@ -168,14 +123,13 @@ button {
 /* Canvas version */
 
 #myCanvas {
-    margin: 1rem;
     image-rendering: -moz-crisp-edges;
     image-rendering: -webkit-crisp-edges;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
     box-shadow: inset 1rem rgba(0, 0, 0, 0.188);
     z-index: -1;
-    position: absolute;
+    position: absolute; 
 }
 
 .select-colour.ul {
@@ -223,7 +177,6 @@ button {
 
 .App.pink {
     box-shadow: inset 0px 0px 100px 20px rgb(255 165 180 / 20%);
-    background-color: rgba(255, 165, 180, 0.1);
 }
 
 .App.blue {
