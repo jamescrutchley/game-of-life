@@ -125,7 +125,7 @@ const Game = () => {
     }
 
     const toggleColour = (i) => {
-        if ((i.target.classList[0] == 'ul') || (i.target.classList[0] == undefined)) {
+        if ((i.target.classList[0] === 'ul') || (i.target.classList[0] === undefined)) {
             return;
         }
 

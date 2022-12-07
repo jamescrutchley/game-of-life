@@ -1,6 +1,5 @@
 
 html {
-    height: 100%;
     width: auto;
     /* display: flex; */
     justify-content: center;
@@ -9,6 +8,7 @@ html {
 }
 
 .App {
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,6 +17,7 @@ html {
 
 
 .test {
+  box-sizing: border-box;
   height: 100%;
   width: 100%;
   display: flex;
@@ -112,7 +113,6 @@ button {
 @media only screen and (min-width: 600px) {
     .test {
         flex-direction: row;
-        margin: 1rem;
     } 
     
     .app {
@@ -123,14 +123,13 @@ button {
 /* Canvas version */
 
 #myCanvas {
-    margin: 1rem;
     image-rendering: -moz-crisp-edges;
     image-rendering: -webkit-crisp-edges;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
     box-shadow: inset 1rem rgba(0, 0, 0, 0.188);
     z-index: -1;
-    position: absolute;
+    position: absolute; 
 }
 
 .select-colour.ul {

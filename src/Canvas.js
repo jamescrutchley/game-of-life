@@ -3,11 +3,6 @@ import { useEffect, useRef } from 'react';
 
 const Canvas = (props) => {
 
-    function random(number) {
-        return Math.floor(Math.random()*number);
-      }
-
-    
     let colourLookup = {
         'pink': 'rgba(254,191,220,1)',
         'blue': 'rgba(156,255,255,1)',
@@ -34,22 +29,20 @@ const Canvas = (props) => {
 
         myGrid.forEach(row => {
             
-
-            let yIncrement = canvasHeight / 22;
-            x = 10;
+            let yIncrement = canvasHeight / 21;
+            x = -30;
             y+= yIncrement;
 
             let opacityValue = (-1 * ((67*y*y) / 12000000) + ((551*y) / 120000) + 0.1);
-
             selectedColour = selectedColour.substr(0, 17) + opacityValue + ')'
 
             row.forEach(cell => {
-                let xIncrement = canvasWidth / 22;
+                let xIncrement = canvasWidth / 20;
                 x+=xIncrement;
                 let num = parseInt(cell)
 
 
-                if (num == 1) {
+                if (num === 1) {
                 ctx.moveTo(20, 20);
                 ctx.beginPath();
                 ctx.fillStyle = selectedColour;
@@ -82,8 +75,8 @@ const Canvas = (props) => {
 
         // ctx.canvas.height = canvasHeight;
 
-        canvasWidth = window.innerWidth - 30;
-        canvasHeight = window.innerHeight - 30;
+        canvasWidth = window.innerWidth;
+        canvasHeight = window.innerHeight;
         [ctx.canvas.height, ctx.canvas.width] = [canvasHeight, canvasWidth]
 
         draw(ctx);
