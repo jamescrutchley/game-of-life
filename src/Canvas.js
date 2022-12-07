@@ -49,11 +49,7 @@ const Canvas = (props) => {
                 ctx.arc(x, y, (canvasHeight+canvasWidth)/ 70, 0, 2 * Math.PI);
                 ctx.fill();
                 } else {
-                    // ctx.moveTo(20, 20);
-                    // ctx.beginPath();
-                    // ctx.fillStyle = `rgba(216,237,255,0.05)`;
-                    // ctx.arc(x, y, 100, 0, 2 * Math.PI);
-                    // ctx.fill();
+                    // could add styling for dead cells here.
                 }
             
             })
