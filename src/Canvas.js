@@ -42,8 +42,6 @@ const Canvas = (props) => {
             let opacityValue = (-1 * ((67*y*y) / 12000000) + ((551*y) / 120000) + 0.1);
 
             selectedColour = selectedColour.substr(0, 17) + opacityValue + ')'
-            console.log(selectedColour);
-
 
             row.forEach(cell => {
                 let xIncrement = canvasWidth / 22;
@@ -84,8 +82,8 @@ const Canvas = (props) => {
 
         // ctx.canvas.height = canvasHeight;
 
-        canvasWidth = window.innerWidth - 40;
-        canvasHeight = window.innerHeight - 40;
+        canvasWidth = window.innerWidth - 30;
+        canvasHeight = window.innerHeight - 30;
         [ctx.canvas.height, ctx.canvas.width] = [canvasHeight, canvasWidth]
 
         draw(ctx);

@@ -39,7 +39,6 @@ const Game = () => {
     }
 
     const play = () => {
-        console.log('play set to true')
         setIsActive(true);
     }
 
@@ -57,7 +56,6 @@ const Game = () => {
             }
         } else {
             clearTimeout(interval);
-            console.log('null interval')
         }
         });
 
@@ -127,15 +125,15 @@ const Game = () => {
     }
 
     const toggleColour = (i) => {
-        console.log(i.target.classList[0]);
+        if ((i.target.classList[0] == 'ul') || (i.target.classList[0] == undefined)) {
+            return;
+        }
 
         let target = i.target.classList[0];
         setTheme(target);
-
     }
 
     const changeSpeed = (e) => {
-        console.log(e.target.value);
         setGameSpeed(200 / e.target.value)
     }
 
