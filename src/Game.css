@@ -4,7 +4,10 @@ html {
     /* display: flex; */
     justify-content: center;
     box-sizing: border-box;
-    background-color: rgba(235, 235, 235, 1);
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 .App {
@@ -13,6 +16,12 @@ html {
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    height: 100vh;
+}
+
+
+.active .control-panel-buttons {
+    opacity: 0.5;
 }
 
 
@@ -27,6 +36,10 @@ html {
   margin: 0;
 }
 
+h1 {
+    font-size: calc(30px - 2vw);
+}
+
 p {
     margin: 0px;
     font-size: 30px;
@@ -37,31 +50,22 @@ p {
     font-size: large;
     margin-bottom: 1rem;
     text-align: center;
+
+    position: absolute;
+    top: 10vh;
+    right: 2vw;
 }
 
-
-button {
-    background-color: rgba(255, 165, 180, 0.2);
-    color:black;
-    font-size:larger;
-    position: center;
-}
 
 .control-panel {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin: 2rem;
-    gap: 0.5rem;
+    margin: 3vw;
+    gap: 2rem;
+    transition: 0.5s opacity ease;
 }
 
-.control-panel h1 {
-    padding-bottom: 5px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    backdrop-filter: blur(3px);
-}
 
 .control-panel-buttons {
     display: flex;
@@ -69,15 +73,6 @@ button {
     gap: 0.5em;
 }
 
-.control-panel-buttons button {
-    border: none;
-    margin-left: 2rem;
-    width: 120%;
-    align-self: center;
-    border-radius: 3em;
-    border: black 0.1em solid;
-    backdrop-filter: blur(10px);
-}
 
 .control-panel-buttons button:hover {
     background-color: rgba(255, 165, 180, 0.3); 
@@ -105,11 +100,6 @@ button {
 }
 
 
-
-
-
-
-
 @media only screen and (min-width: 600px) {
     .test {
         flex-direction: row;
@@ -127,9 +117,15 @@ button {
     image-rendering: -webkit-crisp-edges;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
-    box-shadow: inset 1rem rgba(0, 0, 0, 0.188);
     z-index: -1;
-    position: absolute; 
+    
+    position: absolute;
+
+    filter: drop-shadow(7px -4px 2px darkgreen);
+    top: 10vh;
+    height: 80vh;
+    max-width: 100vw;
+    align-self: center;
 }
 
 .select-colour.ul {
@@ -155,62 +151,113 @@ button {
     cursor: pointer;
 }
 
-.pink.select-colour-button {
-    filter: invert(86%) sepia(77%) saturate(641%) hue-rotate(284deg) brightness(112%) contrast(99%);
+.select-colour-button {
+    border: 2px solid black;
 }
 
-.blue.select-colour-button {
-    filter: invert(97%) sepia(85%) saturate(897%) hue-rotate(150deg) brightness(103%) contrast(104%);
+.control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    height: fit-content;
+
+    border: none;
+    background-color: transparent;
 }
 
-.green.select-colour-button {
-    filter: invert(92%) sepia(9%) saturate(1224%) hue-rotate(61deg) brightness(104%) contrast(101%);
+.play {
+    content: url('./assets/play.svg');
+    height: 30px;
+    width: 30px;
+    
 }
 
-.yellow.select-colour-button {
-    filter: invert(87%) sepia(4%) saturate(3338%) hue-rotate(12deg) brightness(109%) contrast(120%);
+.stop {
+    content: url('./assets/pause.svg');
+    height: 30px;
+    width: 30px;
 }
 
-.white.select-colour-button {
-    filter: invert(100%) sepia(36%) saturate(869%) hue-rotate(332deg) brightness(117%) contrast(108%);
+.next {
+  content: url(assets/debug-step-over.svg);
+  height: 30px;
+  width: 30px;
 }
 
-.App.pink {
-    box-shadow: inset 0px 0px 100px 20px rgb(255 165 180 / 20%);
+.reset {
+    content: url(assets/reset.svg);
+    height: 30px;
+    width: 30px;
 }
 
-.App.blue {
-    box-shadow: inset 0px 0px 100px 20px rgb(156 255 255 / 20%);
+.inner-buttons {
+    border: 2px solid black;
+    width: fit-content;
+
+    background-color: #ffffff8a;
+    /* position: absolute;
+    left: 1rem;
+    top: 20vh; */
 }
 
-.App.green {
-    box-shadow: inset 0px 0px 100px 20px rgb(199 255 193 / 40%);
+.control-panel {
+    position: absolute;
+    top: 20vh;
 }
 
-.App.yellow {
-    box-shadow: inset 0px 0px 100px 20px rgb(255 255 153 / 40%);
+header {
+    position: absolute;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid black;
 }
 
-.App.white {
-    box-shadow: inset 0px 0px 100px 20px rgb(255 255 255 / 40%);
+footer {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid black;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.control-panel-buttons button.pink {
-    background-color: rgba(255, 165, 180, 0.4);
+footer a {
+    height: 2vh;
+    margin: 0;
+    padding: 0;
 }
 
-.control-panel-buttons button.blue {
-    background-color: rgba(156, 255, 255, 0.4);
+input[type="range"] {
+    transform: rotate(270deg);
+    position: absolute;
+    left: -3rem;
+    bottom: -13vh;
 }
 
-.control-panel-buttons button.green {
-    background-color: rgba(199, 255, 193, 0.6);
+input[type="range" i]::-webkit-slider-runnable-track {
+    /* -webkit-appearance: none; */
+    appearance: none;
+    /* width: 2rem;
+    height: 2rem; */
+    /* background-color: #fff; */
+    -webkit-user-modify: read-write !important;
+    cursor: pointer;
+    border-radius: 50%;
 }
 
-.control-panel-buttons button.yellow {
-    background-color: rgba(255, 255, 153, 0.6);
-}
-
-.control-panel-buttons button.white {
-    background-color: rgba(255, 255, 255, 0.6);
+label {
+    content: url(./assets/speed.svg);
+    margin-top: 2rem;
 }

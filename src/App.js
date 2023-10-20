@@ -5,7 +5,7 @@ import ThemeContext from './Theme';
 
 function App() {
 
-  const [theme, setTheme] = useState('pink');
+  const [theme, setTheme] = useState('green');
   const appClassList = `App ${theme}`;
 
   return (
